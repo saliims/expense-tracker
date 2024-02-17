@@ -49,10 +49,15 @@ exports.getExpenseById = async (req, res) => {
 
 exports.updateExpense = async (req, res) => {
   try {
-    const { content } = req.body;
+    const { description, amount, category, date } = req.body;
     const expense = await Expense.findByIdAndUpdate(
       req.params.id,
-      { content },
+      {
+        description,
+        amount,
+        category,
+        date,
+      },
       { new: true }
     );
 
