@@ -46,6 +46,9 @@ const authSlice = createSlice({
       state.userInfo = action.payload.user;
       state.userToken = action.payload.token;
     });
+    builder.addCase(userLogin.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(userLogin.rejected, (state, action) => {
       toast.error(action.payload);
     });

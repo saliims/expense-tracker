@@ -9,10 +9,12 @@ import Income from "./pages/Income";
 import AppLayout from "./ui/AppLayout";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import { DarkModeProvider } from "./context/DarkModeContext.jsx";
+import PageNotFound from "./pages/PageNotFound.jsx";
 
 function App() {
   return (
-    <>
+    <DarkModeProvider>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -30,6 +32,7 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
       <Toaster
@@ -52,7 +55,7 @@ function App() {
           },
         }}
       />
-    </>
+    </DarkModeProvider>
   );
 }
 

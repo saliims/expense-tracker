@@ -40,7 +40,7 @@ const StyledNavLink = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-indigo-400);
-    background-color: var(--color-grey-50);
+    background-color: var(--color-grey-100);
     border-radius: var(--border-radius-sm);
   }
 
@@ -83,7 +83,7 @@ export default function MainNav() {
         </li>
 
         <li>
-          <StyledNavLink to="/settings">
+          <StyledNavLink to="/">
             <HiOutlineCog6Tooth />
             <span>Settings</span>
           </StyledNavLink>
