@@ -7,6 +7,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Income from "./pages/Income";
 import AppLayout from "./ui/AppLayout";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 function App() {
   return (
@@ -14,7 +16,13 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="expenses" element={<Expense />} />
@@ -24,6 +32,26 @@ function App() {
           <Route path="signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+          },
+        }}
+      />
     </>
   );
 }

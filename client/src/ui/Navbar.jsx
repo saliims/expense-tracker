@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import Logo from "./Logo";
+import HeaderMenu from "./HeaderMenu";
 
 const StyledNavbar = styled.nav`
-  padding: 2rem 1.8rem;
+  padding: 1.5rem 1rem;
   border-bottom: 1px solid var(--color-grey-100);
   display: flex;
   align-items: center;
@@ -50,8 +52,12 @@ const StyledNavLink = styled(NavLink)`
 export default function Navbar() {
   return (
     <StyledNavbar>
-      <StyledNavLink>Navbar</StyledNavLink>
-      <StyledNavLink>User</StyledNavLink>
+      <StyledNavLink>
+        <Logo />
+      </StyledNavLink>
+      <StyledNavLink>
+        <HeaderMenu />
+      </StyledNavLink>
     </StyledNavbar>
   );
 }
