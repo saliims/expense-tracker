@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "./authActions";
 
 function LoginForm() {
-  const { loading } = useSelector((state) => state.auth.loading);
-
+  const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [identifier, setIdentifier] = useState("test");
   const [password, setPassword] = useState("test1234");

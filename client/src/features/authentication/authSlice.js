@@ -18,17 +18,19 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    [userLogin.fulfilled]: (state, { payload }) => {
+    [userLogin.fulfilled]: (state, action) => {
       state.loading = false;
-      state.userInfo = payload;
-      state.userToken = payload.token;
+      state.userInfo = action.payload.user;
+      state.userToken = action.payload.token;
+      toast.success(action.payload.message);
     },
-    [userLogin.rejected]: (state, { payload }) => {
+
+    [userLogin.rejected]: (state, action) => {
       state.loading = false;
-      state.error = payload;
+      state.error = action.payload;
     },
-    setCredentials: (state, { payload }) => {
-      state.userInfo = payload;
+    setCredentials: (state, action) => {
+      state.userInfo = action.payload;
     },
     logout: (state) => {
       localStorage.removeItem("userToken");
@@ -41,6 +43,8 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(userLogin.fulfilled, (state, action) => {
       toast.success(action.payload.message);
+      state.userInfo = action.payload.user;
+      state.userToken = action.payload.token;
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       toast.error(action.payload);
