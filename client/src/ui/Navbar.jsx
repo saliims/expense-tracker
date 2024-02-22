@@ -55,9 +55,8 @@ export default function Navbar() {
       <StyledNavLink>
         <Logo />
       </StyledNavLink>
-      <StyledNavLink>
-        <HeaderMenu />
-      </StyledNavLink>
+
+      <HeaderMenu />
     </StyledNavbar>
   );
 }

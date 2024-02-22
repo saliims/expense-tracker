@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin } from "./authActions";
+import { registerUser, userLogin } from "./authActions";
 import { toast } from "react-hot-toast";
+
+const userToken = localStorage.getItem("userToken")
+  ? localStorage.getItem("userToken")
+  : null;
 
 const initialState = {
   loading: false,
   userInfo: {},
-  userToken: localStorage.getItem("userToken") || null,
+  userToken,
   error: null,
   success: false,
 };
@@ -14,21 +18,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    [userLogin.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [userLogin.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.userInfo = action.payload.user;
-      state.userToken = action.payload.token;
-      toast.success(action.payload.message);
-    },
-
-    [userLogin.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
     setCredentials: (state, action) => {
       state.userInfo = action.payload;
     },
@@ -51,6 +40,20 @@ const authSlice = createSlice({
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       toast.error(action.payload);
+      state.loading = false;
+    });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      toast.success(action.payload.message);
+    });
+    builder.addCase(registerUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(registerUser.rejected, (state, action) => {
+      toast.error(action.payload);
+      state.loading = false;
     });
   },
 });

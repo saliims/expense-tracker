@@ -16,7 +16,7 @@ const FullPage = styled.div`
 
 export default function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const { data, isFetching } = useGetUserDetailsQuery("userDetails", {
@@ -28,21 +28,17 @@ export default function ProtectedRoute({ children }) {
   }, [data, dispatch]);
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!userToken) {
       navigate("/login");
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userToken]);
 
-  if (isFetching) {
+  if (isFetching || !userToken) {
     return (
       <FullPage>
         <Spinner />
       </FullPage>
     );
-  }
-
-  if (!userInfo) {
-    return null; // Or return a loading state, if preferred
   }
 
   return children;

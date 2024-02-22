@@ -14,11 +14,11 @@ exports.signup = async (req, res) => {
 
     if (existingUser) {
       if (existingUser.email === email) {
-        res
+        return res
           .status(400)
           .json({ message: "User with this email already exists" });
       } else {
-        res
+        return res
           .status(400)
           .json({ message: "User with this username already exists" });
       }
@@ -48,9 +48,9 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user._id);
 
-    res.status(200).json({ message: "Login successful", user, token });
+    return res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error });
+    return res.status(500).json({ error });
   }
 };

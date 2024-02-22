@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import LoginForm from "../features/authentication/LoginForm";
 import Logo from "../ui/Logo";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SignupForm from "../features/authentication/SignupForm";
 
 const LoginLayout = styled.main`
   min-height: 100vh;
@@ -15,10 +16,23 @@ const LoginLayout = styled.main`
   background-color: var(--color-grey-50);
 `;
 
+const ToggleButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--color-grey-900);
+`;
+
 function Login() {
+  const [setLogin, isSetLogin] = useState(true);
   const isAuthenticated = useSelector((state) => state.auth.userToken);
   const navigate = useNavigate();
-  console.log(isAuthenticated);
+
+  const handleToggleForm = () => {
+    isSetLogin((prevState) => !prevState);
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/dashboard");
@@ -28,7 +42,12 @@ function Login() {
   return (
     <LoginLayout>
       <Logo />
-      <LoginForm />
+      {setLogin ? <LoginForm /> : <SignupForm />}
+      <ToggleButton onClick={handleToggleForm}>
+        {setLogin
+          ? "Don't have an account? Sign Up"
+          : "Already have an account? Log In"}
+      </ToggleButton>
     </LoginLayout>
   );
 }

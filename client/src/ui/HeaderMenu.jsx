@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import ButtonIcon from "./ButtonIcon";
 import { HiOutlineUser } from "react-icons/hi2";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logout from "../features/authentication/Logout";
 import DarkModeToggle from "./DarkModeToggle";
+import { useNavigate } from "react-router-dom";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -14,16 +14,22 @@ const StyledHeaderMenu = styled.ul`
 `;
 
 export default function HeaderMenu() {
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
 
+  function handleClick() {
+    navigate("/account");
+    console.log(window.location);
+  }
   return (
     <StyledHeaderMenu>
-      <Link to="/users">
-        <ButtonIcon>
+      <li>
+        <ButtonIcon onClick={handleClick}>
           <HiOutlineUser />
           {userInfo.user && userInfo.user.username}
         </ButtonIcon>
-      </Link>
+      </li>
+
       <li>
         <DarkModeToggle />
       </li>

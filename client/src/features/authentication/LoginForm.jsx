@@ -17,6 +17,8 @@ function LoginForm() {
     e.preventDefault();
     if (!identifier || !password) return;
     dispatch(userLogin({ identifier, password }));
+    setIdentifier("");
+    setPassword("");
   }
 
   return (
