@@ -20,6 +20,12 @@ const ButtonIcon = styled.button`
     height: 2.2rem;
     color: var(--color-brand-600);
   }
+  @media (max-width: 720px) {
+    & svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
 `;
 
 export default ButtonIcon;

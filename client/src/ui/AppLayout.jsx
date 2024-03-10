@@ -8,6 +8,8 @@ const StyledAppLayout = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  @media (max-width: 900px) {
+  }
 `;
 
 const Main = styled.main`
@@ -22,6 +24,10 @@ const Container = styled.div`
   display: grid;
   gap: 2rem;
   grid-template-columns: 300px 1fr;
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export default function AppLayout() {

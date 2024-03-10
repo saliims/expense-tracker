@@ -12,13 +12,17 @@ const Form = styled.form`
       border: 1px solid var(--color-grey-100);
       border-radius: var(--border-radius-md);
     `}
+  @media (max-width: 576px) {
+    font-size: 1.2rem;
+    width: 80vw;
+  }
 
   ${(props) =>
     props.type === "modal" &&
     css`
       width: 80rem;
     `}
-    
+
   overflow: hidden;
   font-size: 1.4rem;
 `;
