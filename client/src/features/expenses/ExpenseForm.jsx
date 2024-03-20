@@ -11,6 +11,7 @@ import styled from "styled-components";
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  width: auto;
 `;
 
 const StyledFormRowVertical = styled(FormRowVertical)`

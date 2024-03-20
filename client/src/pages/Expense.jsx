@@ -4,23 +4,33 @@ import { fetchExpenses } from "../features/expenses/expenseAction";
 import styled from "styled-components";
 import ExpenseForm from "../features/expenses/ExpenseForm";
 import SpinnerMini from "../ui/SpinnerMini";
+import ExpensesTable from "../features/expenses/ExpensesTable";
 
 const ExpenseLayout = styled.div`
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: auto 1fr;
   gap: 1rem;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Change to a single column layout */
+    grid-template-columns: 1fr;
+  }
+`;
+
+const TableWrapper = styled.div`
+  grid-column: 2;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  max-width: 100%; /* Ensure the table wrapper does not exceed the screen width */
+  @media (max-width: 768px) {
+    grid-column: 1;
   }
 `;
 
 export default function Expense() {
   const dispatch = useDispatch();
-  const { expenses, loading } = useSelector((state) => state.expenses);
+
+  const { loading } = useSelector((state) => state.expenses);
 
   useEffect(() => {
-    // Dispatch the fetchExpenses thunk when the component mounts
     dispatch(fetchExpenses());
   }, [dispatch]);
 
@@ -31,12 +41,9 @@ export default function Expense() {
   return (
     <ExpenseLayout>
       <ExpenseForm />
-
-      {expenses.map((expense) => (
-        <div key={expense._id}>
-          {expense.description} {expense.category} {expense.amount}
-        </div>
-      ))}
+      <TableWrapper>
+        <ExpensesTable />
+      </TableWrapper>
     </ExpenseLayout>
   );
 }
