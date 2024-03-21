@@ -48,7 +48,7 @@ function ExpensesTable() {
         <Table.Body
           data={expensesOnPage}
           render={(expense) => (
-            <ExpenseRow key={expense.id} expense={expense} />
+            <ExpenseRow key={expense._id} expense={expense} />
           )}
         />
       </Table>

@@ -114,7 +114,7 @@ export default function MainNav() {
             <span>Expenses</span>
           </StyledNavLink>
         </li>
-        <li>
+        {/*<li>
           <StyledNavLink to="/incomes">
             <UilMoneyWithdraw />
             <span>Incomes</span>
@@ -127,6 +127,7 @@ export default function MainNav() {
             <span>Settings</span>
           </StyledNavLink>
         </li>
+  */}
       </NavList>
       <LastLi>&copy; All rights reserved </LastLi>
     </NavWrapper>

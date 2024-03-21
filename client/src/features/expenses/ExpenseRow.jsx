@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menu";
@@ -7,6 +6,8 @@ import { HiEye, HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDispatch } from "react-redux";
+import { deleteExpense } from "./expenseAction";
 
 const Expense = styled.div`
   font-size: 1.6rem;
@@ -36,24 +37,21 @@ const Amount = styled.div`
 `;
 
 function ExpenseRow({
-  expense: { id: expenseId, category, description, amount },
+  expense: { _id: expenseId, category, description, amount },
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+  const handleDeleteExpense = () => {
+    dispatch(deleteExpense({ expenseId }));
   };
 
   return (
     <Table.Row>
       <Expense>{category}</Expense>
-
       <Stacked>
         <span>{description}</span>
       </Stacked>
-
       <Amount>{formatCurrency(amount)}</Amount>
       <Modal>
         <Menus.Menu>
@@ -70,7 +68,10 @@ function ExpenseRow({
             </Modal.Open>
           </Menus.List>
           <Modal.Window name="delete">
-            <ConfirmDelete resourceName="expense" disabled />
+            <ConfirmDelete
+              resourceName="expense"
+              onConfirm={handleDeleteExpense}
+            />
           </Modal.Window>
         </Menus.Menu>
       </Modal>

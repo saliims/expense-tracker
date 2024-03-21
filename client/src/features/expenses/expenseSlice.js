@@ -1,6 +1,5 @@
-// expensesSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { addExpense, fetchExpenses } from "./expenseAction";
+import { addExpense, deleteExpense, fetchExpenses } from "./expenseAction";
 import toast from "react-hot-toast";
 
 const initialState = {
@@ -38,6 +37,20 @@ const expensesSlice = createSlice({
       state.expenses.push(action.payload.expense);
     });
     builder.addCase(addExpense.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(deleteExpense.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(deleteExpense.fulfilled, (state, action) => {
+      state.expenses = state.expenses.filter(
+        (expense) => expense.id !== action.payload.id
+      );
+      state.loading = false;
+    });
+    builder.addCase(deleteExpense.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

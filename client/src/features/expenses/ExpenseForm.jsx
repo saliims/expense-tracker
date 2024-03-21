@@ -12,6 +12,7 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   width: auto;
+  border: none;
 `;
 
 const StyledFormRowVertical = styled(FormRowVertical)`
@@ -74,7 +75,7 @@ export default function ExpenseForm() {
         />
       </StyledFormRowVertical>
       <ButtonContainer>
-        <Button disabled={loading} size="small">
+        <Button disabled={loading} size="medium">
           {!loading ? "Add expense" : <SpinnerMini />}
         </Button>
       </ButtonContainer>

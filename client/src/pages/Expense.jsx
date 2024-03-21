@@ -2,22 +2,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExpenses } from "../features/expenses/expenseAction";
 import styled from "styled-components";
-import ExpenseForm from "../features/expenses/ExpenseForm";
 import SpinnerMini from "../ui/SpinnerMini";
 import ExpensesTable from "../features/expenses/ExpensesTable";
+import AddExpense from "../features/expenses/AddExpense";
 
 const ExpenseLayout = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
   }
 `;
 
 const TableWrapper = styled.div`
-  grid-column: 2;
   overflow-x: auto; /* Enable horizontal scrolling if needed */
   max-width: 100%; /* Ensure the table wrapper does not exceed the screen width */
   @media (max-width: 768px) {
@@ -40,10 +38,10 @@ export default function Expense() {
 
   return (
     <ExpenseLayout>
-      <ExpenseForm />
       <TableWrapper>
         <ExpensesTable />
       </TableWrapper>
+      <AddExpense />
     </ExpenseLayout>
   );
 }

@@ -49,3 +49,25 @@ export const addExpense = createAsyncThunk(
     }
   }
 );
+
+export const deleteExpense = createAsyncThunk(
+  "expenses/deleteExpense",
+  async ({ expenseId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.delete(
+        `${backendUrl}/api/expense/${expenseId}`,
+        config
+      );
+      return response.data; // Return the data from the response
+    } catch (error) {
+      // If an error occurs, reject the promise with the error message
+      return rejectWithValue(error.message);
+    }
+  }
+);
