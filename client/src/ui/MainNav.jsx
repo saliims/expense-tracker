@@ -129,7 +129,6 @@ export default function MainNav() {
         </li>
   */}
       </NavList>
-      <LastLi>&copy; All rights reserved </LastLi>
     </NavWrapper>
   );
 }

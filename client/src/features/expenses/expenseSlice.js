@@ -46,7 +46,7 @@ const expensesSlice = createSlice({
     });
     builder.addCase(deleteExpense.fulfilled, (state, action) => {
       state.expenses = state.expenses.filter(
-        (expense) => expense.id !== action.payload.id
+        (expense) => expense._id !== action.payload.id
       );
       state.loading = false;
     });
